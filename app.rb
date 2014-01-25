@@ -11,7 +11,8 @@ class App < Sinatra::Base
     end
 
     get '/' do
-        "Hello World!"
+        "http://localhost:5000/solar?system_size=4&lat=38&lon=-77"
+    end
     end
 
     get '/solar' do
