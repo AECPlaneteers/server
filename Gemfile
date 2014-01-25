@@ -7,4 +7,4 @@ gem 'sinatra'
 gem 'sinatra-param'
 gem 'sinatra-contrib'
 gem 'httparty'
-gem 'dotenv', :groups => [:development, :test]
+gem 'dotenv'

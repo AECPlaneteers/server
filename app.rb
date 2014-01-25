@@ -1,8 +1,3 @@
-# require 'sinatra'
-# require 'sinatra/param'
-# 
-# require 'httparty'
-
 class App < Sinatra::Base
     helpers Sinatra::Param
 
