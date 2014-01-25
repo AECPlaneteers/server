@@ -3,6 +3,10 @@ server
 
 # API
 
+Current endpoint:
+
+http://planeteer.herokuapp.com/
+
 ### Solar Savings
 `/solarsavings?system_size={system_size_kw}&lat={geo_lat}&lon={geo_lon}`
 Sample response:
@@ -58,4 +62,5 @@ Use calculations from PVWatt Web Tool:
 - Tool: http://pvwatts.nrel.gov/pvwatts.php
 - Documentation: http://nrelpubs.nrel.gov/WebtopSecure/ws/nich/int/nrel/Record?rpp=25&upp=0&m=1&w=NATIVE%28%27TITLE_V+ph+words+%27%27PVWatts+Version+1+Technical+Reference%27%27%27%29&order=native%28%27pubyear%2FDescend%27%29 (currently not working)
 - SAM Cost model: https://www.nrel.gov/analysis/sam/help/html-php/index.html?cf_residential_and_commercial.htm
+- SAM Modeling Software: https://sam.nrel.gov/
 - Sample Excel worksheet for PV calculations: http://pvwatts.nrel.gov/downloads/pvwatts_economic_results_sample.xls
