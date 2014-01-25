@@ -1,3 +1,31 @@
+class SolarResults
+    attr_accessor :estimated_installation_cost
+    attr_accessor :assumed_electric_rate
+    attr_accessor :payback_year
+    attr_accessor :annual_savings
+
+    def self.FromPVWattsV3Data(data)
+        sr = SolarResults.new
+
+        sr.estimated_installation_cost = data["outputs"]["financials"]["installed_cost"]
+        sr.assumed_electric_rate = data["outputs"]["financials"]["electric_rate"]
+        sr.payback_year = data["outputs"]["financials"]["payback"]
+        sr.annual_savings = data["outputs"]["financials"]["payback"]
+        sr
+    end
+
+    # Crappy, but works
+    def to_json
+        {
+            estimated_installation_cost: self.estimated_installation_cost,
+            assumed_electric_rate: self.assumed_electric_rate,
+            payback_year: self.payback_year,
+            annual_savings: self.annual_savings
+        }.to_json
+    end
+end
+
+
 class App < Sinatra::Base
     helpers Sinatra::Param
 
@@ -20,20 +48,20 @@ class App < Sinatra::Base
     end
 
     get '/solarsavings' do
+        param :system_size,     Float, required: true
+        param :derate_factor,   Float, default: 0.77
+        param :lat,             Float, required: true
+        param :lon,             Float, required: true
 
-        annual_savings = []
+        pvw_data = fetch_pvwatts_data(ENV['PVWATTS_API_KEY'], params[:system_size], params[:derate_factor], params[:lat], params[:lon])
 
-        30.times do |year|
-            annual_savings << 500 + year * 1.456
+        if pvw_data['errors'].count > 0
+            status 422
+            { errors: pvw_data['errors'] }.to_json
+        else
+            solar_results = SolarResults.FromPVWattsV3Data(pvw_data)
+            solar_results.to_json
         end
-
-        {
-            estimated_installation_cost: 24000,
-            assumed_electric_rate: 0.11,
-            payback_year: 24.5,
-            annual_savings: annual_savings
-
-        }.to_json
     end
 
     def fetch_pvwatts_data(api_key, system_size, derate_factor, lat, lon)
