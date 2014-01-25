@@ -21,5 +21,11 @@ class App < Sinatra::Base
 
     def fetch_pvwatts_data(api_key, system_size, derate_factor, lat, lon)
         response = HTTParty.get("http://developer.nrel.gov/api/pvwatts/v3.json?api_key=#{api_key}&system_size=#{system_size}&dataset=tmy2&derate=#{derate_factor}&lat=#{lat}&lon=#{lon}")
+
+        response_data = response.parsed_response
+
+        response_data["outputs"].delete("sam_output")
+
+        response_data
     end
 end
