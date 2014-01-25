@@ -6,7 +6,8 @@ class App < Sinatra::Base
     end
 
     get '/' do
-        "http://localhost:5000/solar?system_size=4&lat=38&lon=-77"
+        content_type :html
+        erb :index
     end
 
     get '/solar' do
