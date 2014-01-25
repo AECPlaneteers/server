@@ -10,7 +10,7 @@ class SolarResults
         sr.estimated_installation_cost = data["outputs"]["financials"]["installed_cost"]
         sr.assumed_electric_rate = data["outputs"]["financials"]["electric_rate"]
         sr.payback_year = data["outputs"]["financials"]["payback"]
-        sr.annual_savings = data["outputs"]["financials"]["payback"]
+        sr.annual_savings = data["outputs"]["financials"]["util_cost_savings"]
         sr
     end
 
