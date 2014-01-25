@@ -8,7 +8,6 @@ class App < Sinatra::Base
     get '/' do
         "http://localhost:5000/solar?system_size=4&lat=38&lon=-77"
     end
-    end
 
     get '/solar' do
         param :system_size,     Float, required: true
