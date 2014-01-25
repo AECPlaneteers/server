@@ -47,7 +47,7 @@ class App < Sinatra::Base
         fetch_pvwatts_data(ENV['PVWATTS_API_KEY'], params[:system_size], params[:derate_factor], params[:lat], params[:lon]).to_json
     end
 
-    get '/solarsavings' do
+    get '/solarcalculator' do
         param :system_size,     Float, required: true
         param :derate_factor,   Float, default: 0.77
         param :lat,             Float, required: true

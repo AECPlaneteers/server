@@ -8,7 +8,7 @@ Current endpoint:
 http://planeteer.herokuapp.com/
 
 ### Solar Savings
-`/solarsavings?system_size={system_size_kw}&lat={geo_lat}&lon={geo_lon}`
+`/solarcalculator?system_size={system_size_kw}&lat={geo_lat}&lon={geo_lon}`
 Sample response:
 ```json
 {
