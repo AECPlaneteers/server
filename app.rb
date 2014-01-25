@@ -19,6 +19,23 @@ class App < Sinatra::Base
         fetch_pvwatts_data(ENV['PVWATTS_API_KEY'], params[:system_size], params[:derate_factor], params[:lat], params[:lon]).to_json
     end
 
+    get '/solarsavings' do
+
+        annual_savings = []
+
+        30.times do |year|
+            annual_savings << 500 + year * 1.456
+        end
+
+        {
+            estimated_installation_cost: 24000,
+            assumed_electric_rate: 0.11,
+            payback_year: 24.5,
+            annual_savings: annual_savings
+
+        }.to_json
+    end
+
     def fetch_pvwatts_data(api_key, system_size, derate_factor, lat, lon)
         response = HTTParty.get("http://developer.nrel.gov/api/pvwatts/v3.json?api_key=#{api_key}&system_size=#{system_size}&dataset=tmy2&derate=#{derate_factor}&lat=#{lat}&lon=#{lon}")
 
