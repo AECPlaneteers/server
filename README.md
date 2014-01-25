@@ -1,6 +1,51 @@
 server
 ======
 
+# API
+
+### Solar Savings
+`/solarsavings?system_size={system_size_kw}&lat={geo_lat}&lon={geo_lon}`
+Sample response:
+```json
+{
+   "estimated_installation_cost":24000,
+   "assumed_electric_rate":0.11,
+   "payback_year":24.5,
+   "annual_savings":[
+      500.0,
+      501.456,
+      502.912,
+      504.368,
+      505.824,
+      507.28,
+      508.736,
+      510.192,
+      511.648,
+      513.104,
+      514.56,
+      516.016,
+      517.472,
+      518.928,
+      520.384,
+      521.84,
+      523.296,
+      524.752,
+      526.208,
+      527.664,
+      529.12,
+      530.576,
+      532.032,
+      533.488,
+      534.944,
+      536.4,
+      537.856,
+      539.312,
+      540.768,
+      542.224
+   ]
+}
+```
+
 # Data Sources
 
 Currently using PVWatts API v3 for savings information.  Given a system system size (in kW) and a lat/lon, it will return a 30 year cost model based on a bunch of internal assumptions on total system cost, utility rate information, etc.
