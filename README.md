@@ -1,6 +1,12 @@
 server
 ======
 
+# Setup
+Set your NREL API key
+
+Development: `echo "PVWATTS_API_KEY=YOUR_KEY" > .env`
+Heroku: `heroku config:set PVWATTS_API_KEY=YOUR_KEY`
+
 # API
 
 Current endpoint:
