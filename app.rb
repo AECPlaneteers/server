@@ -26,6 +26,19 @@ class SolarResults
         self.annual_savings.map_cumulative_sum
     end
 
+    def array_to_year_keypairs(array)
+
+        current_year = DateTime.now
+
+        array.each_with_index.map do |el,idx|
+
+            year = current_year.strftime("%G")
+            current_year = current_year >> 12
+
+            { year => el }
+        end
+    end
+
     # Crappy, but works
     def to_json
         {
@@ -33,7 +46,9 @@ class SolarResults
             assumed_electric_rate: self.assumed_electric_rate,
             payback_year: self.payback_year,
             annual_savings: self.annual_savings,
-            cumulative_annual_savings: self.cumulative_annual_savings
+            cumulative_annual_savings: self.cumulative_annual_savings,
+            annual_savings_by_year: array_to_year_keypairs(self.annual_savings),
+            cumulative_annual_savings_by_year: array_to_year_keypairs(self.cumulative_annual_savings)
         }.to_json
     end
 end
