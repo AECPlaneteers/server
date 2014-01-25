@@ -1,8 +1,16 @@
+class Array
+  def map_cumulative_sum
+    sum = 0
+    self.map{|x| sum += x}
+  end
+end
+
 class SolarResults
     attr_accessor :estimated_installation_cost
     attr_accessor :assumed_electric_rate
     attr_accessor :payback_year
     attr_accessor :annual_savings
+    attr_reader :cumulative_annual_savings
 
     def self.FromPVWattsV3Data(data)
         sr = SolarResults.new
@@ -10,8 +18,12 @@ class SolarResults
         sr.estimated_installation_cost = data["outputs"]["financials"]["installed_cost"]
         sr.assumed_electric_rate = data["outputs"]["financials"]["electric_rate"]
         sr.payback_year = data["outputs"]["financials"]["payback"]
-        sr.annual_savings = data["outputs"]["financials"]["payback"]
+        sr.annual_savings = data["outputs"]["financials"]["util_cost_savings"]
         sr
+    end
+
+    def cumulative_annual_savings
+        self.annual_savings.map_cumulative_sum
     end
 
     # Crappy, but works
@@ -20,7 +32,8 @@ class SolarResults
             estimated_installation_cost: self.estimated_installation_cost,
             assumed_electric_rate: self.assumed_electric_rate,
             payback_year: self.payback_year,
-            annual_savings: self.annual_savings
+            annual_savings: self.annual_savings,
+            cumulative_annual_savings: self.cumulative_annual_savings
         }.to_json
     end
 end
